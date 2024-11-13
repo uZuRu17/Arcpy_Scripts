@@ -3,7 +3,7 @@ arcpy.SelectLayerByAttribute_management("Sector_Cadastral","NEW_SELECTION",""" "
 #reseteaza suma suprafetelor
 sum = 0.0
 for row in arcpy.SearchCursor("Sector_Cadastral"):
-    sum = sup+row.Shape_Area
+    sum = sum+row.Shape_Area
       
 #arata rezultat
 print sum
