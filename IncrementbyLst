@@ -1,0 +1,17 @@
+#Creste valoarea unui camp in functie de numarul de aparitii in lista
+lst = [1977, 1976, 1039, 1484, 1977, 1464, 1039, 1489, 2527, 1475, 1039]
+
+aparitii = {}
+for id in lst:
+    aparitii[id] = aparitii.get(id, 0) + 1
+
+count = 0
+with arcpy.da.UpdateCursor("LayerulMeu", ["ID", "Attribut_de_completat"]) as cursor:
+    for row in cursor:
+        id_curent = row[0]
+        if id_curent in aparitii:
+            row[1] = aparitii[id_curent]
+            cursor.updateRow(row)
+            count += 1
+
+print "Actualizate: " + str(count) + " feature"
